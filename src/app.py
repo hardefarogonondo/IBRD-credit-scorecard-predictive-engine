@@ -1,29 +1,30 @@
-import streamlit as st
-import requests
+# Import Libraries
 import json
+import requests
+import streamlit as st
 
-# Defining the server URL
-API_URL = "http://localhost:8000/score"
+# Initialization
+API_URL = 'http://localhost:8000/score'
+with open('inputs.json', 'r') as file:
+    inputs = json.load(file)
 
-# UI building
+# Main UI
 st.title("IBRD Credit Scorecard Predictive Engine")
 
-# Input fields
-region = st.selectbox('Region', ['Region 1', 'Region 2', 'Region 3'])
-country = st.selectbox('Country', ['Country 1', 'Country 2', 'Country 3'])
-guarantor = st.selectbox('Guarantor', ['Guarantor 1', 'Guarantor 2', 'Guarantor 3'])
-loan_type = st.selectbox('Loan Type', ['Loan Type 1', 'Loan Type 2', 'Loan Type 3'])
-principal_amount = st.number_input('Principal Amount', min_value=0)
+# Service Inputs
+region = st.selectbox("Region", inputs["regions"])
+country = st.selectbox("Country", inputs["countries"])
+guarantor = st.selectbox("Guarantor", inputs["guarantors"])
+loan_type = st.selectbox("Loan Type", inputs["loan_types"])
+principal_amount = st.number_input("Principal Amount", min_value = 0)
 
-# Submit button
-if st.button('Predict Score'):
-    # Creating the data dictionary
-    data = {'Region': region, 'Country': country, 'Guarantor': guarantor, 'Loan Type': loan_type, 'Principal Amount': principal_amount}
-    
-    # Sending a post request to our API and saving the response
-    response = requests.post(API_URL, json={'data': data})
-    
-    # Extracting the prediction from the response
+# Predict Score Button
+if st.button("Predict Score"):
+    data = {"region": region,
+            "country": country,
+            "guarantor": guarantor,
+            "loan_ype": loan_type,
+            "principal_amount": principal_amount}
+    response = requests.post(API_URL, json = {'data': data})
     prediction = response.json()['score']
-    
     st.write(f"Predicted Score: {prediction}")
