@@ -25,6 +25,6 @@ if st.button("Predict Score"):
             "guarantor": guarantor,
             "loan_ype": loan_type,
             "principal_amount": principal_amount}
-    response = requests.post(API_URL, json = {'data': data})
-    prediction = response.json()['score']
+    response = requests.post(API_URL, json = {"data": data})
+    prediction = response.json()["score"]
     st.write(f"Predicted Score: {prediction}")
