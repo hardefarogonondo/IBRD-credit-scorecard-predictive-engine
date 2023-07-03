@@ -23,7 +23,7 @@ if st.button("Predict Score"):
     data = {"region": region,
             "country": country,
             "guarantor": guarantor,
-            "loan_ype": loan_type,
+            "loan_type": loan_type,
             "principal_amount": principal_amount}
     response = requests.post(API_URL, json = {"data": data})
     prediction = response.json()["score"]
