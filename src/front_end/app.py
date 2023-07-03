@@ -4,18 +4,18 @@ import requests
 import streamlit as st
 
 # Initialization
-API_URL = 'http://localhost:8000/score'
-with open('inputs.json', 'r') as file:
-    inputs = json.load(file)
+API_URL = 'http://127.0.0.1:8000/score'
+with open('../config/input_options.json', 'r') as file:
+    input_options = json.load(file)
 
 # Main UI
 st.title("IBRD Credit Scorecard Predictive Engine")
 
 # Service Inputs
-region = st.selectbox("Region", inputs["regions"])
-country = st.selectbox("Country", inputs["countries"])
-guarantor = st.selectbox("Guarantor", inputs["guarantors"])
-loan_type = st.selectbox("Loan Type", inputs["loan_types"])
+region = st.selectbox("Region", input_options["regions"])
+country = st.selectbox("Country", input_options["countries"])
+guarantor = st.selectbox("Guarantor", input_options["guarantors"])
+loan_type = st.selectbox("Loan Type", input_options["loan_types"])
 principal_amount = st.number_input("Principal Amount", min_value = 0)
 
 # Predict Score Button
