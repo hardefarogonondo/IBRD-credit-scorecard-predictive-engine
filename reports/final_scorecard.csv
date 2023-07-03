@@ -1,0 +1,42 @@
+Feature Name,Coefficients,Original Feature,Score - Final
+Intercept,-8.51802883816588,Intercept,555.0
+region:EASTERN AND SOUTHERN AFRICA & EAST ASIA AND PACIFIC,-0.0773217684452223,region,-1.0
+region:EUROPE AND CENTRAL ASIA & SOUTH ASIA,-0.20803277060102118,region,-3.0
+region:LATIN AMERICA AND CARIBBEAN,-0.5485178523603091,region,-8.0
+region:MIDDLE EAST AND NORTH AFRICA,-0.2051755185305539,region,-3.0
+region:WESTERN AND CENTRAL AFRICA,0.0,region,0.0
+country:group_a,0.0,country,0.0
+country:group_b,0.415893449057099,country,6.0
+country:group_c,1.5766520464641582,country,24.0
+country:group_d,1.5307370162779521,country,24.0
+country:group_e,1.5834745171468214,country,24.0
+country:group_f,5.0170385459504985,country,77.0
+country:group_g,5.449087637169539,country,84.0
+country:group_h,5.726417666572818,country,88.0
+country:group_i,6.063553753306262,country,93.0
+country:group_j,7.193513976996177,country,111.0
+country:group_k,8.51843130277834,country,131.0
+guarantor:group_a,0.0,guarantor,0.0
+guarantor:group_b,1.8625969010317303,guarantor,29.0
+guarantor:group_c,1.3990365548121901,guarantor,22.0
+guarantor:group_d,0.9677923107890699,guarantor,15.0
+guarantor:group_e,1.4364371557567708,guarantor,22.0
+guarantor:group_f,-1.9732456592004974,guarantor,-30.0
+guarantor:group_g,-2.441028366525728,guarantor,-38.0
+guarantor:group_h,-2.5854609877531627,guarantor,-40.0
+guarantor:group_i,-2.8576773505515978,guarantor,-44.0
+guarantor:group_j,-3.6902279716661726,guarantor,-57.0
+loan_type:group_a,0.0,loan_type,0.0
+loan_type:group_b,0.9041765403695206,loan_type,14.0
+loan_type:group_c,0.9378450889284492,loan_type,14.0
+loan_type:group_d,3.004462166190256,loan_type,46.0
+principal_amount:-inf_to_1978840.31,3.3716284477410157,principal_amount,52.0
+principal_amount:1978840.31_to_8013587.75,1.4665120826776192,principal_amount,23.0
+principal_amount:23240000.00_to_40215236.00,0.7345457445870074,principal_amount,11.0
+principal_amount:249441952.00_to_inf,1.3254222117141876,principal_amount,20.0
+principal_amount:40215236.00_to_54947816.00,0.0,principal_amount,0.0
+principal_amount:54947816.00_to_249441952.00,0.8541560313221453,principal_amount,13.0
+principal_amount:8013587.75_to_23240000.00,1.295506483991816,principal_amount,20.0
+country_guarantor_status:differ,-12.331334954710897,country_guarantor_status,-190.0
+country_guarantor_status:no_guarantor,2.4093032507121594,country_guarantor_status,37.0
+country_guarantor_status:same,0.0,country_guarantor_status,0.0
