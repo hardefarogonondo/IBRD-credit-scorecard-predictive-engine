@@ -5,7 +5,7 @@ import streamlit as st
 
 # Initialization
 API_URL = 'http://127.0.0.1:8000/score'
-with open('config/input_options.json', 'r') as file:
+with open('/config/input_options.json', 'r') as file:
     input_options = json.load(file)
 
 # Main UI
