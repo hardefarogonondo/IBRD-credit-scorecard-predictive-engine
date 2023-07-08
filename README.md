@@ -1,41 +1,88 @@
 # IBRD Credit Scorecard Predictive Engine
 
-An innovative solution for credit scoring leveraging machine learning to predict credit risk using The International Bank for Reconstruction and Development (IBRD) Loans dataset.
+An innovative solution for credit scoring, leveraging machine learning to predict credit risk, using The International Bank for Reconstruction and Development (IBRD) Loans dataset.
 
 ## Table of Contents
 
 1. [Project Description](#project-description)
-2. [System Architecture](#system-architecture)
-3. [Data Requirements and Response](#data-requirements-and-response)
-4. [Dataset Information](#dataset-information)
-5. [Usage](#usage)
-6. [Workflow](#workflow)
-7. [Conclusions and Future Work](#conclusions-and-future-work)
-8. [References](#references)
+2. [Project Architecture](#project-architecture)
+3. [Installation Guide](#installation-guide)
+4. [Project Workflow](#project-workflow)
+5. [Conclusions](#conclusions)
+6. [Future Works](#future-works)
+7. [References](#references)
 
 ## Project Description
 
-The project aims to tackle the critical task of segregating loan risks for banks and other financial institutions. The International Bank for Reconstruction and Development (IBRD) Loans dataset provides the foundation for developing a scorecard system to predict credit risk.
+In the financial industry, accurately assessing the risk associated with each loan is a crucial and persistent problem. The objective is to ensure financial stability and prevent loss by approving loans for those who are likely to repay them fully and on time. The business metric here is the accuracy of risk assessment which directly influences the approval/rejection of loans and ultimately the profit and loss.
 
-## System Architecture
+To address this problem, we propose a machine learning solution: a credit scorecard system. We leverage the International Bank for Reconstruction and Development (IBRD) Loans dataset and use a Logistic Regression model to predict the credit risk associated with each loan. The machine learning metric we're most interested in is the model's ability to accurately predict 'bad' loans, i.e., the precision and recall for 'bad' loans.
 
-This solution employs a Logistic Regression model developed with Python. The model's design allows extraction of each feature's Log Odds, which aids in calculating the final scorecard.
+## Project Architecture
 
-## Data Requirements and Response
+The project's architecture has a structured folder layout for better organization and accessibility. The root directory consists of several sub-folders each dedicated for specific purposes. The project's folder structure would look like this:
 
-For prediction via the API, the input requires specific data related to the borrower. The output response from the API will be the predicted score, with higher scores indicating lesser risk.
+```bash
+.
+├── data
+│   ├── processed
+│   └── raw
+├── models
+│   └── logs
+├── notebooks
+│   ├── 1_data_preparation
+│   ├── 2_exploratory_data_analysis_and_preprocessing
+│   ├── 3_feature_engineering
+│   └── 4_model_training_and_evaluation
+├── references
+├── reports
+│   └── figures
+└── src
+    ├── back_end
+    │   └── config
+    └── front_end
+        └── config
+```
 
-## Dataset Information
+## Installation Guide
 
-The dataset contains loan data from IBRD. It includes various features like Region, Country, Guarantor, Loan Type, and Original Principal Amount. The dataset was treated by dropping columns with more than 50% missing values, creating labels for the loan status, and one-hot encoding the features.
+This project utilizes Docker to manage the service environment. Here's a step-by-step guide to build the Docker image, create the Docker container, and run the service:
 
-## Usage
+### Build The Docker Image
 
-This section includes information about the expected input payload and the project output message format. It also contains a step-by-step guide on how to use the machine learning service in local environments, with model retraining and running the API locally.
+Open your terminal in the project root directory, and run the following command to build the Docker image:
 
-**API Request Format**
+```bash
+docker build ibrd_credit_scorecar_predictive_engine .
+```
 
-Your API request must be in the following format:
+### Create The Docker Container
+
+Now, let's create a Docker container from the image we just built. Run the following command:
+
+```bash
+docker run 80:80 ibrd_credit_scorecard_predictive_engine_container ibrd_credit_scorecard_predictive_engine
+```
+
+Upon successfully creating the Docker container, your service should automatically be up and running. You can access it through the localhost port on your web browser with Streamlit. If you want to stop the service for any reason, you can use the following command:
+
+```bash
+docker stop ibrd_credit_scorecard_predictive_engine_container
+```
+
+### Run the Service
+
+To start the service, use the following command in your terminal:
+
+```bash
+docker start ibrd_credit_scorecard_predictive_engine_container
+```
+
+You can now access the front-end of the service through the localhost port on your web browser with Streamlit. To interact with the service, fill in the required fields and click on the "Predict Score" button. The service will then return the credit score corresponding to the provided information.
+
+### API Request Format
+
+For those who want to interact with the backend directly, you can use applications like Postman and send a POST request to the API endpoint using the following JSON format:
 
 ```json
 {
@@ -49,9 +96,9 @@ Your API request must be in the following format:
 }
 ```
 
-**API Response Format**
+### API Response Format
 
-Your API request must be in the following format:
+The API will respond with the predicted credit score in the following format:
 
 ```json
 {
@@ -59,13 +106,53 @@ Your API request must be in the following format:
 }
 ```
 
-## Workflow
+## Project Workflow
 
-This section provides detailed documentation of the project workflow, starting from data acquisition and preparation, exploratory data analysis, feature engineering, model building, and evaluation.
+The project follows a four-step process: Data Preparation, Exploratory Data Analysis & Preprocessing, Feature Engineering, and Modeling & Evaluation. Below, we provide a detailed overview of each step, accompanied by block diagrams for a better understanding.
 
-## Conclusions and Future Work
+### Dataset Information
 
-A summary of the project outcomes, key findings, and suggestions for future improvements and potential explorations.
+The dataset we used originates from the International Bank for Reconstruction and Development (IBRD), and it contains data on public and publicly guaranteed debt extended by the World Bank Group. It includes key features such as Region, Country, Guarantor, Loan Type, and Original Principal Amount. For a more comprehensive understanding, please refer to the detailed dataset documentation accessible via this [link](references/DATASET.md).
+
+### Data Preparation
+
+Data Preparation involves checking data definition and data types validation. The prepared data then exported to .pkl format to ensures that there are no changes to the data types, which can often occur when using other formats.
+
+![Data Preparation Block Diagram](reports/figures/data_preparation_block_diagram.png)
+
+### Exploratory Data Analysis & Preprocessing
+
+The exploratory data analysis and preparation process started with removing columns containing more than 50% missing values and labeling loan statuses as 'good' or 'bad'. Preliminary data analysis was performed, including reviewing the dataset's time span and visualizing the data to gain insights. To understand the data's statistical properties, we conducted skewness analysis, chi-squared analysis, ANOVA F analysis, and correlation analysis. Based on these insights, variable selection was carried out by eliminating variables with high correlation. This resulted in a training and testing split of the dataset with a ratio of 70:30. Notably, no normalization was applied due to the intent to bin the data into categories in subsequent stages.
+
+![Data Preprocessing Block Diagram](reports/figures/data_preprocessing_block_diagram.png)
+
+### Feature Engineering
+
+During Feature Engineering, we refined the dataset by removing unused features, specifically those only relevant after a loan has been issued or granted. We wanted to keep the data applicable to pending loan applications. Additionally, we generated new features to enrich our dataset. Using techniques such as Information Value and Weight of Evidence, we observed trends and gauged feature importance. This knowledge allowed us to bin our features into different categories. Finally, to facilitate scorecard creation, we utilized one-hot encoding to transform categorical variables into a form that could be better utilized by machine learning algorithms.
+
+![Feature Engineering Block Diagram](reports/figures/feature_engineering_block_diagram.png)
+
+### Modeling & Evaluation
+
+In the Modeling & Evaluation phase, we started by training a baseline model using Logistic Regression. This model's performance provided us with a benchmark to gauge our progress. Subsequently, we optimized the model's hyperparameters with a Bayesian Search approach, combined with cross-validation, to ensure robustness and efficiency.
+
+After optimizing the hyperparameters, we retrained the model and evaluated its performance again. In doing so, we observed improvements in model performance metrics like Accuracy, Precision, Recall, and AUC-ROC.
+
+Finally, we transformed our fine-tuned model's outputs into a credit scorecard. This scorecard presents the predictive results in an easily interpretable way, essential for financial institutions to make informed decisions.
+
+![Modeling & Evaluation Block Diagram](reports/figures/model_training_and_evaluation_block_diagram.png)
+
+## Conclusions
+
+- Implemented Logistic Regression to build a predictive model for loan risk assessment.
+- Improved 'bad' loan detection through Bayesian Search cross-validation, overcoming initial overfitting in the baseline model.
+- Though the final model's accuracy is slightly lower, its distinguishing capability between 'good' and 'bad' loans serves our core objective.
+
+## Future Works
+
+- Expand our dataset to improve balance.
+- Explore different feature engineering approaches and models.
+- Implement advanced techniques like ensemble learning or deep learning for enhanced predictions.
 
 ## References
 
