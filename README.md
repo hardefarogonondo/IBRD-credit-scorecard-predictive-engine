@@ -53,7 +53,7 @@ This project utilizes Docker to manage the service environment. Here's a step-by
 Open your terminal in the project root directory, and run the following command to build the Docker image:
 
 ```bash
-docker build ibrd_credit_scorecar_predictive_engine .
+docker-compose build
 ```
 
 ### Create The Docker Container
@@ -61,13 +61,13 @@ docker build ibrd_credit_scorecar_predictive_engine .
 Now, let's create a Docker container from the image we just built. Run the following command:
 
 ```bash
-docker run 80:80 ibrd_credit_scorecard_predictive_engine_container ibrd_credit_scorecard_predictive_engine
+docker-compose up
 ```
 
 Upon successfully creating the Docker container, your service should automatically be up and running. You can access it through the localhost port on your web browser with Streamlit. If you want to stop the service for any reason, you can use the following command:
 
 ```bash
-docker stop ibrd_credit_scorecard_predictive_engine_container
+docker-compose down
 ```
 
 ### Run the Service
@@ -75,7 +75,7 @@ docker stop ibrd_credit_scorecard_predictive_engine_container
 To start the service, use the following command in your terminal:
 
 ```bash
-docker start ibrd_credit_scorecard_predictive_engine_container
+docker-compose up
 ```
 
 You can now access the front-end of the service through the localhost port on your web browser with Streamlit. To interact with the service, fill in the required fields and click on the "Predict Score" button. The service will then return the credit score corresponding to the provided information.
@@ -153,6 +153,11 @@ Finally, we transformed our fine-tuned model's outputs into a credit scorecard. 
 - Expand our dataset to improve balance.
 - Explore different feature engineering approaches and models.
 - Implement advanced techniques like ensemble learning or deep learning for enhanced predictions.
+
+## Medium Stories
+
+- [From Data to Decisions: A Voyage Through Loan Risk Prediction](https://medium.com/@hardefarogonondo/logistic-regression-for-loan-risk-assessment-made-easy-ef67ef8885f)
+- [Navigating the Data Sea: A Detailed Map of Our Credit Risk Modeling Voyage](https://medium.com/@hardefarogonondo/navigating-the-data-sea-a-detailed-map-of-our-credit-risk-modeling-voyage-48127a041c6f)
 
 ## References
 
