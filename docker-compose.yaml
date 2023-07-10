@@ -1,0 +1,21 @@
+version: "3"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./src/back_end/Dockerfile
+    image: icspe_back_end:latest
+    container_name: icspe_back_end_container
+    ports:
+      - 8000:8000
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./src/front_end/Dockerfile
+    image: icspe_front_end:latest
+    container_name: icspe_front_end_container
+    ports:
+      - 8501:8501
+    volumes:
+      - ./src/front_end:/streamlit_app
